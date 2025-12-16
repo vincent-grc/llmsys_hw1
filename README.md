@@ -8,7 +8,7 @@ The starting code base is provided in [llmsystem/llmsys_f25_hw1.git](https://git
 
 **Prerequisites:** You'll need a GPU to complete this assignment. We recommend Google Colab, which is free and similar to Jupyter Notebooks, and allows you to run on a GPU. You are also welcome to use AWS credits and PSC accounts to access Virtual Machines with more advanced GPU, which will be signed up later, but not necessary.
 
-Please check your version of Python (Python 3.8+), run either:
+Please check your version of Python (Python 3.12+), run either:
 
 ```bash
 python --version
@@ -26,11 +26,6 @@ source venv/bin/activate
 
 If you choose anaconda, run the following command:
 
-```bash
-conda create -n minitorch-cuda python=3.9
-conda activate minitorch-cuda
-```
-
 Then clone the starter codes from the git repo and install packages.
 
 ```bash
@@ -38,10 +33,9 @@ git clone https://github.com/llmsystem/llmsys_f25_hw1.git
 cd llmsys_f25_hw1
 # If you are using PSC, 
 # please load the CUDA module before installing packages:
-# module load cuda/12.4.0
-python -m pip install -r requirements.txt
-python -m pip install -r requirements.extra.txt
-python -m pip install -Ue .
+# module load cuda/12.6.0
+pip install -r requirements.txt
+pip install -Ue .
 ```
 
 Make sure that everything is installed by running the following command:
