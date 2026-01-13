@@ -4,7 +4,7 @@ The goal of this assignment is to implement high-performance CUDA kernels for te
 
 ## Environment Setup
 
-The starting code base is provided in [llmsystem/llmsys_f25_hw1.git](https://github.com/llmsystem/llmsys_f25_hw1.git).
+The starting code base is provided in [llmsystem/llmsys_hw1.git](https://github.com/llmsystem/llmsys_hw1.git).
 
 **Prerequisites:** You'll need a GPU to complete this assignment. We recommend Google Colab, which is free and similar to Jupyter Notebooks, and allows you to run on a GPU. You are also welcome to use AWS credits and PSC accounts to access Virtual Machines with more advanced GPU, which will be signed up later, but not necessary.
 
@@ -27,9 +27,9 @@ source venv/bin/activate
 Then clone the starter codes from the git repo and install packages.
 
 ```bash
-git clone https://github.com/llmsystem/llmsys_f25_hw1.git
-cd llmsys_f25_hw1
-# If you are using PSC, 
+git clone https://github.com/llmsystem/llmsys_hw1.git
+cd llmsys_hw1
+# If you are using PSC,
 # please load the CUDA module before installing packages:
 # module load cuda/12.6.0
 python -m pip install -r requirements.txt
@@ -60,9 +60,9 @@ src/
 
 ## Problem 1: Map Operation CUDA Kernel + Integration (15 points)
 
-Implement the CUDA kernel for element-wise map operations and integrate it with the MiniTorch framework. The map operation applies a unary function to every element of an input tensor, producing a new tensor with the same shape. For example, applying `f(x) = x²` to tensor `[1, 2, 3]` yields `[1, 4, 9]`. 
+Implement the CUDA kernel for element-wise map operations and integrate it with the MiniTorch framework. The map operation applies a unary function to every element of an input tensor, producing a new tensor with the same shape. For example, applying `f(x) = x²` to tensor `[1, 2, 3]` yields `[1, 4, 9]`.
 
-**Note**: Be sure to check out the CUDA examples in [lecture 3 slides](https://llmsystem.github.io/llmsystem2025spring/assets/files/llmsys-03-gpu-programming2-4075ed5f62b3601db6bbe1991e5980c0.pdf) and the [cuda accelaration examples](https://github.com/llmsystem/llmsys_code_examples/tree/main/cuda_acceleration_demo)!
+**Note**: Be sure to check out the CUDA examples in the lecture slides and the [cuda accelaration examples](https://github.com/llmsystem/llmsys_code_examples/tree/main/cuda_acceleration_demo)!
 
 The places where you need to fill in your code are highlighted with `BEGIN ASSIGN2_1` and `END ASSIGN2_1`
 
@@ -115,12 +115,12 @@ A[1][2] = Adata[1 * strides[0] + 2 * strides[1]]
    python -m pytest -l -v -k "cuda_one_args"    # for map
    ```
 
-   You may encounter *Fatal Error*, it means your cuda implementation is buggy. 
+   You may encounter _Fatal Error_, it means your cuda implementation is buggy.
    You could try to debug your code by adding print statements to your cuda code to print the values of the intermediate variables.
 
 ## Problem 2: Zip Operation CUDA Kernel + Integration (25 points)
 
-Implement the CUDA kernel for element-wise zip operations and integrate it with the framework. This operation applies a binary function to corresponding elements from two input tensors, producing a new tensor with the same shape. For example, applying addition `f(x,y) = x + y` to tensors `[1, 2, 3]` and `[4, 5, 6]` yields `[5, 7, 9]`. 
+Implement the CUDA kernel for element-wise zip operations and integrate it with the framework. This operation applies a binary function to corresponding elements from two input tensors, producing a new tensor with the same shape. For example, applying addition `f(x,y) = x + y` to tensors `[1, 2, 3]` and `[4, 5, 6]` yields `[5, 7, 9]`.
 
 ### Part A: Implement zipKernel (20 points)
 
@@ -328,10 +328,9 @@ python -m pytest -l -v -k "cuda"
 
 **Note**: This integration test includes more comprehensive test cases than the individual problem tests. If you pass the previous problem tests but fail here, please review your implementations.
 
-
 ## Submission
 
-Please submit the whole directory `llmsys_f25_hw1` as a zip on canvas. Your code will be automatically compiled and graded with private test cases.
+Please submit the whole directory `llmsys_hw1` as a zip on canvas. Your code will be automatically compiled and graded with private test cases.
 
 ## FAQs
 
@@ -342,6 +341,6 @@ Please submit the whole directory `llmsys_f25_hw1` as a zip on canvas. Your code
 5. **I'm having trouble understanding the stride-based indexing, can you explain more?** Strides allow flexible memory layouts for multidimensional arrays. Each dimension has a stride that tells you how many elements to skip to move to the next element in that dimension. Practice with simple 2D examples first, then extend to higher dimensions.
 6. **Should I implement the integration part immediately after the kernel?** Yes! This new structure allows you to test your kernel implementation immediately with the Python integration, making testing possible.
 
-------
+---
 
 <sup>1</sup>https://developer.download.nvidia.com/assets/cuda/files/reduction.pdf
