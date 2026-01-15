@@ -268,6 +268,18 @@ __global__ void mapKernel(
   // 4. Calculate the position of element in in_array according to in_index and in_strides
   // 5. Calculate the position of element in out_array according to out_index and out_strides
   // 6. Apply the unary function to the input element and write the output to the out memory
+  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+
+  if (idx < out_size) {
+    to_index(idx, out_shape, out_index, shape_size);
+
+    broadcast_index(out_index, out_shape, in_shape, in_index, shape_size, shape_size);
+
+    int out_pos = index_to_position(out_index, out_strides, shape_size);
+    int in_pos = index_to_position(in_index, in_strides, shape_size);
+
+    out[out_pos] = fn(fn_id, in_storage(in_pos));
+  }
 
   assert(false && "Not Implemented");
   /// END HW1_1
