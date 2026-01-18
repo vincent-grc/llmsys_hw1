@@ -280,8 +280,6 @@ __global__ void mapKernel(
 
     out[out_pos] = fn(fn_id, in_storage[in_pos]);
   }
-
-  assert(false && "Not Implemented");
   /// END HW1_1
 }
 
@@ -359,7 +357,6 @@ __global__ void zipKernel(
   int b_pos = index_to_position(b_index, b_strides, b_shape_size);
   // 8. Apply the binary function to the input elements in a_array & b_array and write the output to the out memory
   out[out_pos] = fn(fn_id, a_storage[a_pos], b_storage[b_pos]);
-  assert(false && "Not Implemented");
   /// END HW1_2
 }
 
