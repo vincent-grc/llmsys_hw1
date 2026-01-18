@@ -509,7 +509,7 @@ __global__ void MatrixMultiplyKernel(
   // 6. Synchronize to make sure all threads are done computing the output tile for (row, col)
   // 7. Write the output to global memory
 
-  
+
   /// END HW1_4
 }
 
@@ -615,7 +615,7 @@ extern "C"
     cudaMemcpy(d_in_shape, in_shape, shape_size * sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(d_in_strides, in_strides, shape_size * sizeof(int), cudaMemcpyHostToDevice);
 
-    int threadsPerBlock = min(a_shape[reduce_dim], BLOCK_DIM);
+    int threadsPerBlock = 32;
     int blocksPerGrid = out_size;
     mapKernel<<<blocksPerGrid, threadsPerBlock>>>(
         d_out, d_out_shape, d_out_strides, out_size,
