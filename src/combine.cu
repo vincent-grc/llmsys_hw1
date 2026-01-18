@@ -429,7 +429,7 @@ __global__ void reduceKernel(
   }
 
   // traverse along the reduce dimension
-  for (int r = tid; r < reduce_size; r += blockDim.x) {
+  for (int r = thread_id; r < reduce_size; r += blockDim.x) {
     a_index[reduce_dim] = r;
     int a_pos = index_to_position(a_index, a_strides, size);
     local = fn(fn_id, local, a_storage[a_pos]);
