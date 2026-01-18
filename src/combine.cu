@@ -615,8 +615,8 @@ extern "C"
     cudaMemcpy(d_in_shape, in_shape, shape_size * sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(d_in_strides, in_strides, shape_size * sizeof(int), cudaMemcpyHostToDevice);
 
-    int threadsPerBlock = 32;
-    int blocksPerGrid = (out_size + threadsPerBlock - 1) / threadsPerBlock;
+    int threadsPerBlock = min(a_shape[reduce_dim], BLOCK_DIM);
+    int blocksPerGrid = out_size;
     mapKernel<<<blocksPerGrid, threadsPerBlock>>>(
         d_out, d_out_shape, d_out_strides, out_size,
         d_in, d_in_shape, d_in_strides,
